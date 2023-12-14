@@ -19,9 +19,18 @@ public class Main {
             for (EmployeePayrollDetails payroll : employeePayrolls) {
                 System.out.println(payroll);
             }
+            System.out.println();
 
             // Update salary for Employee with ID 1
             payrollService.updateEmployeeSalary("Terissa", 3000000.00);
+            System.out.println();
+
+            String startDate="2023-02-1";
+            String endDate="2023-03-31";
+            List<EmployeePayrollDetails> employeesInRange = payrollService.getEmployeesByDateRange(startDate, endDate);
+            for (EmployeePayrollDetails employee : employeesInRange) {
+                System.out.println(employee);
+            }
 
         } catch (PayrollDBException e) {
             e.printStackTrace();

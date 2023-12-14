@@ -34,12 +34,14 @@ public class EmployeePayrollTest {
     public void testCompareEmployeeWithDB() throws PayrollDBException {
         // Arrange
         EmployeePayroll payrollService = new EmployeePayroll(connection);
-        int employeeId = 1;
+        String employeeName = "Terissa";
 
         // Act
-        boolean isDataMatching = payrollService.compareEmployeeWithDB(employeeId);
+        boolean isDataMatching = payrollService.compareEmployeeWithDB(employeeName);
 
         // Assert
-        assertTrue("Data does not match with DB for Employee Name: " + employeeId, isDataMatching);
+        assertTrue("Data does not match with DB for Employee Name: " + employeeName, isDataMatching);
     }
+
+
 }
