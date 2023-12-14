@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.sql.Connection;
 
 import static org.junit.Assert.assertTrue;
+//import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * JUnit test for EmployeePayroll class

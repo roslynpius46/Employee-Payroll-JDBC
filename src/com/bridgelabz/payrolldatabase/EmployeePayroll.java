@@ -27,23 +27,27 @@ public class EmployeePayroll {
      */
     public List<EmployeePayrollDetails> getEmployeePayrollData() throws PayrollDBException {
         List<EmployeePayrollDetails> employeePayrolls = new ArrayList<>();
-        //Connection connection = DBConnection.getConnection();
         try {
             String sql = "SELECT * FROM employee_payroll";
-            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                double salary = resultSet.getDouble("salary");
-                String startDate = resultSet.getString("start_date");
-                employeePayrolls.add(new EmployeePayrollDetails(id, name, salary, startDate));
+            try (PreparedStatement preparedStatement = this.connection.prepareStatement(sql)) {
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    double salary = resultSet.getDouble("salary");
+                    String startDate = resultSet.getString("start_date");
+                    String phone = resultSet.getString("phone");
+                    String address = resultSet.getString("address");
+                    String department = resultSet.getString("department");
+                    employeePayrolls.add(new EmployeePayrollDetails(id, name, salary, startDate, phone, address, department));
+                }
             }
         } catch (SQLException e) {
             throw new PayrollDBException("Error retrieving Employee Payroll data", e);
         }
         return employeePayrolls;
     }
+
 
     /**
      * @desc Update the salary for an employee in the database
@@ -86,8 +90,11 @@ public class EmployeePayroll {
                     String name = resultSet.getString("name");
                     double salary = resultSet.getDouble("salary");
                     String startDate = resultSet.getString("start_date");
+                    String phone = resultSet.getString("phone");
+                    String address = resultSet.getString("address");
+                    String department = resultSet.getString("department");
 
-                    EmployeePayrollDetails dbEmployee = new EmployeePayrollDetails(id, name, salary, startDate);
+                    EmployeePayrollDetails dbEmployee = new EmployeePayrollDetails(id, name, salary, startDate, phone, address, department);
 
                     return Objects.equals(getEmployeeDetails(employeeName), dbEmployee);
                 } else {
@@ -116,7 +123,10 @@ public class EmployeePayroll {
                     String name = resultSet.getString("name");
                     double salary = resultSet.getDouble("salary");
                     String startDate = resultSet.getString("start_date");
-                    return new EmployeePayrollDetails(id, name, salary, startDate);
+                    String phone = resultSet.getString("phone");
+                    String address = resultSet.getString("address");
+                    String department = resultSet.getString("department");
+                    return new EmployeePayrollDetails(id, name, salary, startDate, phone, address, department);
                 } else {
                     return null; // Employee not found in the database
                 }
@@ -146,7 +156,10 @@ public class EmployeePayroll {
                     String name = resultSet.getString("name");
                     double salary = resultSet.getDouble("salary");
                     String joinDate = resultSet.getString("start_date");
-                    employeesInRange.add(new EmployeePayrollDetails(id, name, salary, joinDate));
+                    String phone = resultSet.getString("phone");
+                    String address = resultSet.getString("address");
+                    String department = resultSet.getString("department");
+                    employeesInRange.add(new EmployeePayrollDetails(id, name, salary, joinDate, phone, address, department));
                 }
             }
         } catch (SQLException e) {
