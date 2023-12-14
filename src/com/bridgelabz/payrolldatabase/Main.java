@@ -19,6 +19,10 @@ public class Main {
             for (EmployeePayrollDetails payroll : employeePayrolls) {
                 System.out.println(payroll);
             }
+
+            // Update salary for Employee with ID 1
+            payrollService.updateEmployeeSalary("Terissa", 3000000.00);
+
         } catch (PayrollDBException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());

@@ -1,5 +1,7 @@
 package com.bridgelabz.payrolldatabase;
 
+import java.util.Objects;
+
 /**
  * @desc Class representing Employee Payroll
  */
@@ -32,5 +34,21 @@ public class EmployeePayrollDetails {
                 ", salary=" + salary +
                 ", startDate='" + startDate + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeePayrollDetails that = (EmployeePayrollDetails) o;
+        return id == that.id &&
+                Double.compare(that.salary, salary) == 0 &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(startDate, that.startDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, salary, startDate);
     }
 }
